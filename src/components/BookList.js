@@ -15,7 +15,7 @@ const BookList = () => {
 
   const fetchBooks = async () => {
     try {
-      const response = await axios.get(`YOUR_REST_API_ENDPOINT?page=${page}`);
+      const response = await axios.get(`http://localhost:3000/api/books?page=${page}`);
       const newBooks = response.data.books;
 
       setBooks((prevBooks) => [...prevBooks, ...newBooks]);
