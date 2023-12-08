@@ -1,4 +1,3 @@
-// src/components/BookCard.js
 import React from 'react';
 
 const BookCard = ({ book }) => {
@@ -9,7 +8,7 @@ const BookCard = ({ book }) => {
         <h3>{book.title}</h3>
         <p>Writer: {book.writer}</p>
         <p>Price: ${book.point}</p>
-        <p>Tag: {book.tag}</p>
+        <p>Tag: {book.tag_name}</p>
       </div>
     </div>
   );

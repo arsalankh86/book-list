@@ -1,37 +1,42 @@
-// src/components/Login.js
 import React, { useState } from 'react';
+import axios from 'axios';
+import './CustomerForm.css'; 
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // Add your authentication logic here
-    // For simplicity, let's consider login successful if username and password are not empty
+  const handleLogin = async () => {
     if (username !== '' && password !== '') {
+      const response = await axios.post('http://localhost:3000/api/login', { username, password });
+      const customer = response.data;
+      if(customer.error !== "Customer not found"){
+      console.log('Login successful:', customer);
       onLogin();
+      }
+      else{
+        alert('Invalid credentials. Please enter a username and password.');
+      }
     } else {
       alert('Invalid credentials. Please enter a username and password.');
     }
   };
 
   return (
-    <div className="login-container">
+    <><div className="login-container">
       <h2>Login</h2>
       <input
         type="text"
         placeholder="Username"
         value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
+        onChange={(e) => setUsername(e.target.value)} />
       <input
         type="password"
         placeholder="Password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
-    </div>
+        onChange={(e) => setPassword(e.target.value)} />
+      <button onClick={handleLogin}>Login</button>    
+      </div></>
   );
 };
 
